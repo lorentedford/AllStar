@@ -1,0 +1,11 @@
+--- configure.ac	2008-10-19 18:49:56.000000000 -0400
++++ configure.ac.new	2014-04-11 11:14:06.789480866 -0400
+@@ -1319,7 +1319,7 @@
+ 
+ AST_EXT_LIB_CHECK([SQLITE], [sqlite], [sqlite_exec], [sqlite.h])
+ 
+-AST_EXT_LIB_CHECK([OPENSSL], [ssl], [ssl2_connect], [openssl/ssl.h], [-lcrypto])
++AST_EXT_LIB_CHECK([OPENSSL], [ssl], [SSL_connect], [openssl/ssl.h], [-lcrypto])
+ if test "$PBX_OPENSSL" = "1";
+ then
+     AST_EXT_LIB_CHECK([OSPTK], [osptk], [OSPPCryptoDecrypt], [osp/osp.h], [-lcrypto -lssl])
