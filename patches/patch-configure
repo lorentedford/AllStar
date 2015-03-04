@@ -1,0 +1,56 @@
+--- configure	2008-10-19 23:16:16.000000000 -0400
++++ configure.new	2014-04-11 11:14:54.605495432 -0400
+@@ -27854,9 +27854,9 @@
+       	 pbxlibdir="-L${OPENSSL_DIR}"
+       fi
+    fi
+-   { echo "$as_me:$LINENO: checking for ssl2_connect in -lssl" >&5
+-echo $ECHO_N "checking for ssl2_connect in -lssl... $ECHO_C" >&6; }
+-if test "${ac_cv_lib_ssl_ssl2_connect+set}" = set; then
++   { echo "$as_me:$LINENO: checking for SSL_connect in -lssl" >&5
++echo $ECHO_N "checking for SSL_connect in -lssl... $ECHO_C" >&6; }
++if test "${ac_cv_lib_ssl_SSL_connect+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+@@ -27874,11 +27874,11 @@
+ #ifdef __cplusplus
+ extern "C"
+ #endif
+-char ssl2_connect ();
++char SSL_connect ();
+ int
+ main ()
+ {
+-return ssl2_connect ();
++return SSL_connect ();
+   ;
+   return 0;
+ }
+@@ -27901,21 +27901,21 @@
+ 	 test ! -s conftest.err
+        } && test -s conftest$ac_exeext &&
+        $as_test_x conftest$ac_exeext; then
+-  ac_cv_lib_ssl_ssl2_connect=yes
++  ac_cv_lib_ssl_SSL_connect=yes
+ else
+   echo "$as_me: failed program was:" >&5
+ sed 's/^/| /' conftest.$ac_ext >&5
+ 
+-	ac_cv_lib_ssl_ssl2_connect=no
++	ac_cv_lib_ssl_SSL_connect=no
+ fi
+ 
+ rm -f core conftest.err conftest.$ac_objext conftest_ipa8_conftest.oo \
+       conftest$ac_exeext conftest.$ac_ext
+ LIBS=$ac_check_lib_save_LIBS
+ fi
+-{ echo "$as_me:$LINENO: result: $ac_cv_lib_ssl_ssl2_connect" >&5
+-echo "${ECHO_T}$ac_cv_lib_ssl_ssl2_connect" >&6; }
+-if test $ac_cv_lib_ssl_ssl2_connect = yes; then
++{ echo "$as_me:$LINENO: result: $ac_cv_lib_ssl_SSL_connect" >&5
++echo "${ECHO_T}$ac_cv_lib_ssl_SSL_connect" >&6; }
++if test $ac_cv_lib_ssl_SSL_connect = yes; then
+   AST_OPENSSL_FOUND=yes
+ else
+   AST_OPENSSL_FOUND=no

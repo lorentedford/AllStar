@@ -1,0 +1,9 @@
+dahdi has changes slightly
+
+cd to the base directory of the dahdi installation
+
+patch -p1 < patch-dahdi-dude-fixed.1
+patch -p1 < patch-dahdi-dude-fixed.3
+
+make all
+

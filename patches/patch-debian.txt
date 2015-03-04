@@ -1,0 +1,7 @@
+Debain has changed the format of /etc/init.d/asterisk 
+
+place patch-asterisk-makefile patch-rc-debian 
+in /usr/src/astsrc-1.4.23-pre/asterisk
+
+patch -p1 <patch-rc-debian
+patch <patch-asterisk-makefile
