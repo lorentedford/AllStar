@@ -12,7 +12,7 @@
 
 
 # cd /srv
-# run linode_asterisk_install
+# run linode_asterisk_install.sh
 
 # edit /etc/asterisk/iax.conf
 #	change 1999 to your node number	
