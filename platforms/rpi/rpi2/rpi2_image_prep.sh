@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# change govenor to performance
+# change governor to performance
 echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
 # Setup to install kernel headers

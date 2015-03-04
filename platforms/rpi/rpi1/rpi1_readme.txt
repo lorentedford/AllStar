@@ -1,6 +1,4 @@
-How to install AllStar Asterisk on a Raspberry Pi (PiStar)
-This is not a script on it's own.
-It is a howto that can be coped from.
+How to install AllStar Asterisk on a Raspberry Pi 1 (PiStar)
 
 Start with at leat 4GB card
 Copy stock Raspbian image to SD card

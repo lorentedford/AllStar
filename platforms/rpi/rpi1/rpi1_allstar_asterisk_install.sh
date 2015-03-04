@@ -2,7 +2,7 @@
 
 #########################################################
 #                                                       #
-# script was built for rpi2 AllStar Asterisk install.   #
+# script was built for rpi1 AllStar Asterisk install.   #
 #                                                       #
 #########################################################
 
