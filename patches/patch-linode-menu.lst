@@ -1,0 +1,20 @@
+--- menu.lst	2015-03-03 17:58:16.587628998 +0000
++++ menu.lst	2015-03-03 18:02:16.578051019 +0000
+@@ -16,7 +16,7 @@
+ ## timeout sec
+ # Set a timeout, in SEC seconds, before automatically booting the default entry
+ # (normally the first entry defined).
+-timeout		5
++timeout		10
+ 
+ # Pretty colours
+ color cyan/blue white/blue
+@@ -59,7 +59,7 @@
+ ## e.g. kopt=root=/dev/hda1 ro
+ ##      kopt_2_6_8=root=/dev/hdc1 ro
+ ##      kopt_2_6_8_2_686=root=/dev/hdc2 ro
+-# kopt=root=UUID=eae34339-ca68-4e50-aa64-8072b034c5cf ro
++# kopt=root=/dev/xvda console=hvc0 ro quiet
+ 
+ ## default grub root device
+ ## e.g. groot=(hd0,0)

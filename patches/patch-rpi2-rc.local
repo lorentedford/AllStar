@@ -1,0 +1,10 @@
+--- rc.local	2015-03-04 09:42:43.436073421 -0500
++++ rc.local	2015-03-04 09:43:06.552074132 -0500
+@@ -14,4 +14,7 @@
+ # Start update nodelist
+ /usr/local/bin/rc.updatenodelist &
+ 
+++# change govenor to performance
+++echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
++
+ exit 0

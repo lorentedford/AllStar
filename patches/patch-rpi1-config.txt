@@ -1,0 +1,9 @@
+--- config.txt	2015-03-04 11:01:22.000000000 -0500
++++ config.txt	2014-12-27 07:54:00.000000000 -0500
+@@ -42,3 +42,6 @@
+ #uncomment to overclock the arm. 700 MHz is the default.
+ #arm_freq=800
+ 
++kernel=vmlinuz-3.12-1-rpi
++initramfs initrd.img-3.12-1-rpi followkernel
++

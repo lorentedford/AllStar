@@ -1,0 +1,5 @@
+--- cmdline.txt	2015-03-04 11:01:41.000000000 -0500
++++ cmdline.txt	2014-12-27 13:25:00.000000000 -0500
+@@ -1 +1 @@
+-dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait
++dwc_otg.lpm_enable=0 dwc_otg.speed=1 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait
