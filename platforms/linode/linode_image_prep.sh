@@ -10,7 +10,7 @@ grub-set-default 1
 update-grub
 cd /boot/grub
 
-patch </srv/patches/patch-menu.lst
+patch </srv/patches/patch-linode-menu.lst
 update-grub
 
 # make the changes to you image:

@@ -42,8 +42,13 @@ cd /usr/src/astsrc-1.4.23-pre
 mkdir -p /var/lib/asterisk/sounds/rpt
 cp -a /usr/src/astsrc-1.4.23-pre/sounds/* /var/lib/asterisk/sounds
 
+# Add "Node Enabled" to /var/lib/asterisk/sounds/rpt"
+# cat /var/lib/asterisk/sounds/rpt/node.gsm+/var/lib/asterisk/sounds/enabled.gsm >/var/lib/asterisk/sounds/rpt/node_enabled.gsm
+#
+
 # make /dev/dsp available
 # not needed for a hub
+# Though it will not hurt anything.
 echo snd_pcm_oss >>/etc/modules
 
 echo " If all looks good, edit iax.conf extensions.conf and rpt.conf"
