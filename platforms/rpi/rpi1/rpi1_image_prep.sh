@@ -42,7 +42,7 @@ passwd root
 #### Move this to get_src and comment out
 #### add patch for makeopts
 
-# this may be removed. Kept for now
+# this may be removed. Keep for now
 # At least turn this into a patch
 # install ilbc
 # cp /srv/replaced/get_ilbc_source.sh ./contrib/scripts/get_ilbc_source.sh
