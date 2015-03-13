@@ -6,6 +6,9 @@
 #                                                       #
 #########################################################
 
+# change governor to performance
+echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
 /srv/scripts/required_libs.sh
 /srv/scripts/build_tools.sh
 /srv/scripts/get_src.sh

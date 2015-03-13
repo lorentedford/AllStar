@@ -3,8 +3,6 @@
 # change governor to performance
 echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
-# Setup to install kernel headers
-
 # set the locales and time zone
 dpkg-reconfigure locales
 dpkg-reconfigure tzdata
