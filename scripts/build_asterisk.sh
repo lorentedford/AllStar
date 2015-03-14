@@ -46,8 +46,7 @@ mkdir -p /var/lib/asterisk/sounds/rpt
 cp -a /usr/src/astsrc-1.4.23-pre/sounds/* /var/lib/asterisk/sounds
 
 # Add "Node Enabled" to /var/lib/asterisk/sounds/rpt"
-# cat /var/lib/asterisk/sounds/rpt/node.gsm+/var/lib/asterisk/sounds/enabled.gsm >/var/lib/asterisk/sounds/rpt/node_enabled.gsm
-#
+# cat /var/lib/asterisk/sounds/node.ulaw /var/lib/asterisk/sounds/enabled.ulaw >/var/lib/asterisk/sounds/rpt/node_enabled.ulaw
 
 # make /dev/dsp available
 # not needed for a hub
