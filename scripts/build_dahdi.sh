@@ -10,8 +10,9 @@
 cd /usr/src/astsrc-1.4.23-pre/dahdi-linux-complete-2.10.0.1+2.10.0.1/
 
 # Patch dahdi for use with AllStar Asterisk
-patch -p1 < /srv/patches/patch-dahdi-dude-fixed.1
-patch -p1 < /srv/patches/patch-dahdi-dude-fixed.3
+# https://allstarlink.org/dude-dahdi-2.10.0.1-patches-20150306
+# Soon to be included in the official release of DAHDI from Digium.
+patch -p1 < /srv/patches/patch-dahdi-dude-current
 
 # Build and install dahdi
 make all
@@ -21,6 +22,5 @@ make config
 # Dont need and dahdi hardware drivers loaded for most installs
 mv /etc/dahdi/modules /etc/dahdi/modules.old
 
-# /etc/init.d/dahdi start
 
 
