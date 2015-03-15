@@ -13,7 +13,7 @@ dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
 echo "deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi" >>/etc/apt/sources.list
-wget http://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
+wget http://archive.raspbian.org/raspbian.public.key -O - | apt-key add -
 
 # Make sure we are running the latest and greatest
 apt-get update -y
