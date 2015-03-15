@@ -18,5 +18,5 @@ echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
 # add performance setting to rc.local for rpi2
 cd /etc
-patch </srv/patches/patch-rpi2-rc.local
+patch < /srv/patches/patch-rpi2-rc.local
 
