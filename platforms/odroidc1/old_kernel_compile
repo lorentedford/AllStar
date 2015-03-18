@@ -1,0 +1,64 @@
+#! /bin/sh
+
+# Revision: .000000002
+
+apt-get install ntp -y
+
+dpkg-reconfigure locales
+dpkg-reconfigure tzdata
+
+# libncurses5-dev' instead of 'ncurses-dev'
+
+
+# install the required tools
+apt-get install uboot-mkimage -y
+apt-get install libncurses5-dev -y
+apt-get install bc -y
+apt-get install lzop -y
+
+apt-get install g++ -y
+apt-get install make -y
+apt-get install build-essential -y
+apt-get install subversion -y
+apt-get install git -y
+apt-get install time -y
+apt-get install build-essential -y
+apt-get install kernel-package -y
+apt-get install u-boot-tools -y
+apt-get install initramfs-tools -y
+
+# u-boot-tools is already the newest version.
+# u-boot-tools set to manually installed.
+# 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+
+mount -o remount,rw /boot
+
+cd /srv
+git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/stable/linux-stable.git linux
+cd linux
+
+git remote add hardkernel https://github.com/hardkernel/linux.git
+git remote add mlinuxguy https://github.com/mlinuxguy/odroid-c1-network-driver.git
+git fetch --all
+
+git checkout remotes/mlinuxguy/master -b mlinuxguy-full
+git filter-branch --prune-empty --tree-filter '
+    mkdir -p drivers/amlogic/ethernet/phy &&
+    git ls-tree --name-only $GIT_COMMIT |
+    xargs -I FILE mv FILE drivers/amlogic/ethernet/FILE'
+
+git checkout remotes/hardkernel/odroidc-3.10.y -b odroidc-3.10.y-mlinuxguy
+git merge -s recursive -X theirs mlinuxguy-full
+
+make odroidc_defconfig
+
+nice time make-kpkg -j5 --rootcmd fakeroot --initrd --append-to-version=-odroidc+mlinuxguy kernel_image kernel_headers
+
+cd /boot
+mkimage -A arm -O linux -T kernel -C none -a 00208000 -e 00208000 \
+    -n "Linux-3.10.44" -d /boot/vmlinuz-3.10.44-odroidc+mlinuxguy \
+    /boot/uImage-3.10.44-odroidc+mlinuxguy
+mkimage -A arm -O linux -T ramdisk -C none \
+    -n "uInitrd 3.10.44" -d /boot/initrd.img-3.10.44-odroidc+mlinuxguy \
+    /boot/uInitrd-3.10.44-odroidc+mlinuxguy
+
