@@ -1,21 +1,18 @@
 #! /bin/sh
 
 # Revision: .000000002
-# refrenced from:
-# <http://odroid.com/dokuwiki/doku.php?id=en:c1_building_kernel>
 
 apt-get install ntp -y
+
+dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
-# Not sure any of this is needed
-cd /etc/apt/sources.list.d/
-wget http://oph.mdrjr.net/meveric/sources.lists/meveric-all-C1.list
-wget -O- http://oph.mdrjr.net/meveric/meveric.asc | apt-key add -
-apt-get update
+# libncurses5-dev' instead of 'ncurses-dev'
+
 
 # install the required tools
 apt-get install uboot-mkimage -y
-apt-get install ncurses-dev -y
+apt-get install libncurses5-dev -y
 apt-get install bc -y
 apt-get install lzop -y
 
@@ -24,50 +21,44 @@ apt-get install make -y
 apt-get install build-essential -y
 apt-get install subversion -y
 apt-get install git -y
+apt-get install time -y
+apt-get install build-essential -y
+apt-get install kernel-package -y
+apt-get install u-boot-tools -y
+apt-get install initramfs-tools -y
 
-# I don't think this is needed
-# apt-get install linux-headers-armhf-odroid-c1 -y
+# u-boot-tools is already the newest version.
+# u-boot-tools set to manually installed.
+# 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
 
-cd /srv
-git clone --depth 1 https://github.com/hardkernel/linux.git -b odroidc-3.10.y
-cd linux
-
-# Build The kernel
-
-make odroidc_defconfig
-make menuconfig
-# or copy pre-created .config
-make -j4
-make -j4 modules
-make uImage
-make dtbs
-
-# Installation
-# I don't think ARCH=arm is needed, but it does not hurt anything
-make modules_install ARCH=arm INSTALL_MOD_PATH=/
-
-# Backup boot files
-# The boot partition needs to be RW
 mount -o remount,rw /boot
 
-mkdir /srv/new_boot
-mkdir /srv/back_boot
+cd /srv
+git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/stable/linux-stable.git linux
+cd linux
 
-mv /boot/meson8b_odroidc.dtb /srv/back_boot/meson8b_odroidc.dtb
-mv /boot/uImage /srv/back_boot/uImage
-mv /boot/uInitrd /srv/back_boot/uInitrd
+git remote add hardkernel https://github.com/hardkernel/linux.git
+git remote add mlinuxguy https://github.com/mlinuxguy/odroid-c1-network-driver.git
+git fetch --all
 
-# Install new boot files
-cp arch/arm/boot/dts/meson8b_odroidc.dtb /srv/new_boot
-cp arch/arm/boot/uImage /srv/new_boot
+git checkout remotes/mlinuxguy/master -b mlinuxguy-full
+git filter-branch --prune-empty --tree-filter '
+    mkdir -p drivers/amlogic/ethernet/phy &&
+    git ls-tree --name-only $GIT_COMMIT |
+    xargs -I FILE mv FILE drivers/amlogic/ethernet/FILE'
 
-update-initramfs -c -k 3.10.67 -b /srv/new_boot
-mkimage -A arm -O linux -T ramdisk -C none -a 0 -e 0 -n uInitrd -d /srv/new_boot/initrd.img-3.10.67 /srv/new_boot/uInitrd-3.10.67
+git checkout remotes/hardkernel/odroidc-3.10.y -b odroidc-3.10.y-mlinuxguy
+git merge -s recursive -X theirs mlinuxguy-full
 
-cp /srv/new_boot/meson8b_odroidc.dtb /boot/meson8b_odroidc.dtb
-cp /srv/new_boot/uImage /boot/uImage
-cp /srv/new_boot/uInitrd-3.10.67 /boot/uInitrd
+make odroidc_defconfig
 
-# update-initramfs -c -k `uname -r`
-# mkimage -A arm -O linux -T ramdisk -C none -a 0 -e 0 -n uInitrd -d /boot/initrd.img-`uname -r` /boot/uInitrd-`uname -r`
+nice time make-kpkg -j5 --rootcmd fakeroot --initrd --append-to-version=-odroidc+mlinuxguy kernel_image kernel_headers
+
+cd /boot
+mkimage -A arm -O linux -T kernel -C none -a 00208000 -e 00208000 \
+    -n "Linux-3.10.44" -d /boot/vmlinuz-3.10.44-odroidc+mlinuxguy \
+    /boot/uImage-3.10.44-odroidc+mlinuxguy
+mkimage -A arm -O linux -T ramdisk -C none \
+    -n "uInitrd 3.10.44" -d /boot/initrd.img-3.10.44-odroidc+mlinuxguy \
+    /boot/uInitrd-3.10.44-odroidc+mlinuxguy
 
