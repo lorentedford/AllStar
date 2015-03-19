@@ -1,8 +1,9 @@
 #! /bin/sh
 
 # install subversion and git
-apt-get install git -y
-apt-get install subversion -y
+# Already installed by build_tools
+# apt-get install git -y
+# apt-get install subversion -y
 
 cd /usr/src
 svn checkout http://svn.ohnosec.org/svn/projects/allstar/astsrc-1.4.23-pre/trunk astsrc-1.4.23-pre

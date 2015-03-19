@@ -15,7 +15,10 @@ apt-get update
 
 # install the required tools
 apt-get install uboot-mkimage -y
-apt-get install ncurses-dev -y
+
+# Note, selecting 'libncurses5-dev' instead of 'ncurses-dev'
+
+apt-get install libncurses5-dev -y
 apt-get install bc -y
 apt-get install lzop -y
 
@@ -27,7 +30,7 @@ apt-get install git -y
 
 cd /srv
 git clone --depth 1 https://github.com/hardkernel/linux.git -b odroidc-3.10.y
-cd linux
+cd /srv/linux
 
 # Build The kernel
 
