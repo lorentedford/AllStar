@@ -41,7 +41,7 @@ make dtbs
 # I don't think ARCH=arm is needed, but it does not hurt anything
 make modules_install ARCH=arm INSTALL_MOD_PATH=/
 
-Get the kernel version
+# Get the kernel version
 KV=`make kernelversion`
 
 # Backup boot files
@@ -61,8 +61,9 @@ cp arch/arm/boot/dts/meson8b_odroidc.dtb /srv/new_boot
 cp arch/arm/boot/uImage /srv/new_boot
 
 update-initramfs -c -k $KV -b /srv/new_boot
-mkimage -A arm -O linux -T ramdisk -C none -a 0 -e 0 -n uInitrd -d /srv/new_boot/initrd.img-$KV /srv/new_boot/boot/uInitrd
+mkimage -A arm -O linux -T ramdisk -C none -a 0 -e 0 -n uInitrd -d /srv/new_boot/initrd.img-$KV /srv/new_boot/uInitrd
 
+# put the new files in /boot
 cp /srv/new_boot/meson8b_odroidc.dtb /boot/meson8b_odroidc.dtb
 cp /srv/new_boot/uImage /boot/uImage
 cp /srv/new_boot/uInitrd /boot/uInitrd
