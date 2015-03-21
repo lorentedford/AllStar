@@ -20,7 +20,10 @@ apt-get install linux-headers-3.12-1-rpi -y
 
 # add to /boot/config.txt
 cd /boot
-patch </srv/patches/patch-rpi1-config.txt
+patch < /srv/patches/patch-rpi1-config.txt
+
+# change USB to USB 1.1
+patch < /srv/patches/patch-rpi1-cmdline.txt
 
 # Raspberry Pi will show the DHCP assigned address.
 # Recomended:
